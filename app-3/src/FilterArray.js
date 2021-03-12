@@ -5,30 +5,33 @@ class FilterArray extends Component {
         super();
         this.state = {
             originalArray: ['Apple', 'Banana', 'Orange', 'Mango', 'Pineapple', 'Blueberry'],
-            myArray: ['Apple', 'Banana', 'Orange', 'Mango', 'Pineapple', 'Blueberry'],
+            editArray: ['Apple', 'Banana', 'Orange', 'Mango', 'Pineapple', 'Blueberry'],
             userInput: ''
         }
     }
 
     inputHandler(val){
-        let innerOriginalArray = this.state.originalArray;
-        let innerInput = this.state.userInput;
-        let innermyArray = this.state.myArray
-
         this.setState({ userInput: val })
-        this.setState({ myArray: innerOriginalArray })
-        let innerArray = innermyArray.filter( val => val.includes(innerInput))
+        let innerInput = this.state.userInput;
 
-        this.setState({ myArray: innerArray })
+        let innerEditArray = this.state.originalArray;
+
+        if (innerInput === ''){
+            this.setState({ editArray: innerEditArray });
+        }
+        else if (innerInput !== ''){
+            let innerArray = innerEditArray.filter( val => val.includes(innerInput))
+            this.setState({ editArray: innerArray })
+        }
     }
 
     render(){
-        console.log('My Array is: ' + this.state.myArray);
+        console.log('My Array is: ' + this.state.editArray);
         console.log('My userInput is: ' + this.state.userInput)
         return(
             <div>
                 <input onChange={ (e) => this.inputHandler (e.target.value)}></input>
-                {this.state.myArray.map( val => (<h1 key={val}>{val}</h1> ) )}
+                {this.state.editArray.map( val => (<h1 key={val}>{val}</h1> ) )}
             </div>
         )
     }
