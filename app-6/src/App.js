@@ -17,6 +17,8 @@ class App extends Component{
     innerArray.push(innerInput);
     this.setState({ toDoList: innerArray });
 
+    document.getElementById("toDoInput").value = '';
+
   }
 
   render(){
